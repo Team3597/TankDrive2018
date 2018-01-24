@@ -16,7 +16,7 @@ public class Robot extends IterativeRobot {
 	public static final int RIGHTMOTOR = 0;
 	Talon motor3;
 	public static float speedMultiplier = (float) 1.0;
-	//test
+
 
 	@Override
 	public void robotInit() {
