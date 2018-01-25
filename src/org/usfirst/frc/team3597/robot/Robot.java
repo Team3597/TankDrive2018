@@ -29,6 +29,21 @@ public class Robot extends IterativeRobot {
 		speedMultiplier = (float) 0.8;
 	}
 
+    long autoStart = 0;
+    @Override
+    public void autonomousInit() {
+        autoStart = System.currentTimeMillis();
+    }
+    
+    @Override
+    public void autonomousPeriodic() {
+        // Speed = Motor Speed (-1 to 1). Timeout = amount of time to move (in seconds)
+        double speed = .3, timeout = 2;
+        if (System.currentTimeMillis() - autoStart < (timeout * 1000)) {
+            java.util.Arrays.stream((new Object[]{ LEFTMOTOR })).forEach((Object s) -> ((edu.wpi.first.wpilibj.SpeedController)s).set(speed));
+            java.util.Arrays.stream((new Object[]{ RIGHTMOTOR })).forEach((Object s) -> ((edu.wpi.first.wpilibj.SpeedController)s).set(-speed));
+        }
+    }
 
 	@Override
 	public void teleopPeriodic() {
