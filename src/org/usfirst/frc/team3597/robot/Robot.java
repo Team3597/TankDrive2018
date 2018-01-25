@@ -12,6 +12,7 @@ public class Robot extends IterativeRobot {
 	
 	public static Joystick Controller;
 	public static boolean buttonValueA;
+	public static boolean buttonValueB;
 	public static final int LEFTMOTOR = 1;
 	public static final int RIGHTMOTOR = 0;
 	Talon motor3;
@@ -28,16 +29,25 @@ public class Robot extends IterativeRobot {
 		speedMultiplier = (float) 0.8;
 	}
 
+
 	@Override
-	public void robotPeriodic() {
-		buttonValueA = Controller.getRawButton(5);
+	public void teleopPeriodic() {
+		buttonValueA = Controller.getRawButton(2);
+		buttonValueB = Controller.getRawButton(3);
 		
 		if (buttonValueA) {
-			motor3.set(1);
-		} else {
+			motor3.set(-.10);
+		} else if (!buttonValueA) {
 			motor3.set(0);
 		}
-		
+	
+	
+		if (buttonValueB) {
+			motor3.set(.10);
+		} else if (buttonValueB){
+			motor3.set(0);
+		}
+	
 		Robot.tankDrive(speedMultiplier * (Controller.getRawAxis(3)),speedMultiplier * (Controller.getRawAxis(1)));
 	}
 }
