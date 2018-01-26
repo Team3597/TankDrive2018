@@ -36,14 +36,14 @@ public class Robot extends IterativeRobot {
 		buttonValueB = Controller.getRawButton(3);
 		
 		if (buttonValueA) {
-			motor3.set(-.10);
+			motor3.set(-1.0);
 		} else if (!buttonValueA) {
 			motor3.set(0);
 		}
 	
 	
 		if (buttonValueB) {
-			motor3.set(.10);
+			motor3.set(1.0);
 		} else if (buttonValueB){
 			motor3.set(0);
 		}
