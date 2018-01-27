@@ -27,9 +27,9 @@ public class Robot extends IterativeRobot {
 	String autonomousCommand;
 	SendableChooser<String> chooser = new SendableChooser<>();
 	
-	public static Robot self;
+//	public static Robot self;
 	public static Alliance allianceColor = DriverStation.getInstance().getAlliance();
-	public double start = 0;
+//	public double start = 0;
 
 
 	@Override
@@ -41,7 +41,9 @@ public class Robot extends IterativeRobot {
 		motor3 = new Talon(9);
 		Controller = new Joystick(1); //Setting up controller to correct port (1)
 		speedMultiplier = (float) 0.8;
+
 	}
+    long autoStart = 0;
 
 	@Override
 	public void autonomousInit() {
@@ -49,6 +51,7 @@ public class Robot extends IterativeRobot {
 		autonomousCommand = SmartDashboard.getString("Autonomous Selector", centerAuto);
 		System.out.println("Autonomous selected: " + autonomousCommand);
 		System.out.println("Our alliance color is " + allianceColor);
+		autoStart = System.currentTimeMillis();
 	}
 	
 	@Override
@@ -63,28 +66,20 @@ public class Robot extends IterativeRobot {
 					// Implement a while loop like the default, but FIXED (loop can end)
 				} else {
 					// Same type of loop as above (timer as a general time but if statements for individual instructions? Cleaner code!)
-					Robot.tankDrive(speedMultiplier * (RIGHTMOTOR),speedMultiplier * (-LEFTMOTOR));
+//					Robot.tankDrive(speedMultiplier * (RIGHTMOTOR),speedMultiplier * (LEFTMOTOR));
 //					rightWheels.set(-0.5); // Turns left
 //					leftWheels.set(-0.5);
 				}
 				break;
 			case centerAuto:
 			default:
-				System.out.println("Our alliance color is " + allianceColor);
+//				System.out.println("Our alliance color is " + allianceColor);
 				
-				if (start == 0) {
-					start = System.currentTimeMillis();
-				}
 				
-				double time = System.currentTimeMillis();
-				
-				// TODO: Modify condition so it will switch from auto to teleOp (set public variable to System Time?)
-				if (time <= start + 1000) {
-//					rightWheels.set(-0.25);
-//					leftWheels.set(0.25);
-				} else if (time > start) {
-//					rightWheels.set(0);
-//					leftWheels.set(0);
+		        double speed = .3, timeout = 2;
+		        if (System.currentTimeMillis() - autoStart < (timeout * 1000)) {
+		            java.util.Arrays.stream((new Object[]{ LEFTMOTOR })).forEach((Object s) -> ((edu.wpi.first.wpilibj.SpeedController)s).set(speed));
+		            java.util.Arrays.stream((new Object[]{ RIGHTMOTOR })).forEach((Object s) -> ((edu.wpi.first.wpilibj.SpeedController)s).set(-speed));
 				}
 				
 				break;
