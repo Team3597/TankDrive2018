@@ -27,7 +27,7 @@ import edu.wpi.first.wpilibj.Relay;
 		Robot = new DifferentialDrive(new Spark(LEFTMOTOR), new Spark(RIGHTMOTOR));
 		motor3 = new Talon(9);
 		Controller = new Joystick(1); //Setting up controller to correct port (1)
-		speedMultiplier = (float) 0.8;
+		speedMultiplier = 0.8f;
 	}
 
     long autoStart = 0;
