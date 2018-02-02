@@ -6,8 +6,9 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.Relay;
 
-public class Robot extends IterativeRobot {
+ class Robot extends IterativeRobot {
 	private DifferentialDrive Robot;
 	
 	public static Joystick Controller;
@@ -38,10 +39,10 @@ public class Robot extends IterativeRobot {
     @Override
     public void autonomousPeriodic() {
         // Speed = Motor Speed (-1 to 1). Timeout = amount of time to move (in seconds)
-        double speed = .3, timeout = 2;
+        double timeout = 2;
         if (System.currentTimeMillis() - autoStart < (timeout * 1000)) {
-            java.util.Arrays.stream((new Object[]{ LEFTMOTOR })).forEach((Object s) -> ((edu.wpi.first.wpilibj.SpeedController)s).set(speed));
-            java.util.Arrays.stream((new Object[]{ RIGHTMOTOR })).forEach((Object s) -> ((edu.wpi.first.wpilibj.SpeedController)s).set(-speed));
+ //       	AutoTankRight.set(.5);
+ //       	AutoTankLeft.set(.5);
         }
     }
 
@@ -51,14 +52,14 @@ public class Robot extends IterativeRobot {
 		buttonValueB = Controller.getRawButton(3);
 		
 		if (buttonValueA) {
-			motor3.set(-.10);
+			motor3.set(-1.0);
 		} else if (!buttonValueA) {
 			motor3.set(0);
 		}
 	
 	
 		if (buttonValueB) {
-			motor3.set(.10);
+			motor3.set(1.0);
 		} else if (buttonValueB){
 			motor3.set(0);
 		}
