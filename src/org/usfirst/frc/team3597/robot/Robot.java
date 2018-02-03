@@ -4,11 +4,11 @@ import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.Talon;
+//import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-//import edu.wpi.first.wpilibj.Relay;
+import edu.wpi.first.wpilibj.Relay;
 
- class Robot extends IterativeRobot {
+ public class Robot extends IterativeRobot {
 	private DifferentialDrive Robot;
 	
 	public static Joystick Controller;
@@ -18,16 +18,16 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 	public static final int RIGHTMOTOR = 0;
 	//Talon motor3;
 	public static float speedMultiplier = (float) 1.0;
-	//Relay relay = new Relay(0);
+	Relay relay = new Relay(0);
 
 	@Override
 	public void robotInit() {
-		System.out.println("Robot Ready!");
+		//System.out.println("Robot Ready!");
 		CameraServer.getInstance().startAutomaticCapture();
-		Robot = new DifferentialDrive(new Spark(LEFTMOTOR), new Spark(RIGHTMOTOR));
+		//Robot = new DifferentialDrive(new Spark(LEFTMOTOR), new Spark(RIGHTMOTOR));
 		//motor3 = new Talon(9);
 		Controller = new Joystick(1); //Setting up controller to correct port (1)
-		speedMultiplier = 0.8f;
+		//speedMultiplier = 0.8f;
 
 
 	}
@@ -66,15 +66,15 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 //			motor3.set(0);
 //		}
 		if(buttonValueA) {
-//			relay.set(Relay.Value.kForward);
+			relay.set(Relay.Value.kForward);
 			//relay.set(Relay.Direction.kForward);
 		} else if(buttonValueB) {
-//			relay.set(Relay.Value.kReverse);
+			relay.set(Relay.Value.kReverse);
 			//relay.set(Relay.Direction.kReverse);
 		} else {
-//			relay.set(Relay.Value.kOff);
+			relay.set(Relay.Value.kOff);
 		}
 	
-		Robot.tankDrive(speedMultiplier * (Controller.getRawAxis(3)),speedMultiplier * (Controller.getRawAxis(1)));
+		//Robot.tankDrive(speedMultiplier * (Controller.getRawAxis(3)),speedMultiplier * (Controller.getRawAxis(1)));
 	}
 }
